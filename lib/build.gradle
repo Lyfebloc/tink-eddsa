@@ -1,0 +1,38 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+    id 'java'
+    id 'maven-publish'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "com.squareup.okio:okio:3.3.0"
+
+    testImplementation "org.jetbrains.kotlin:kotlin-test"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit"
+    testImplementation "com.google.code.gson:gson:2.10.1"
+    testImplementation "net.i2p.crypto:eddsa:0.3.0"
+}
+
+tasks.jar {
+    archivesBaseName = "tink-eddsa"
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = "com.github.mixinnetwork"
+            artifactId = "tink-eddsa"
+            version = '0.0.13'
+
+            from components.java
+        }
+    }
+}
+
